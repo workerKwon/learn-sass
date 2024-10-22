@@ -1,0 +1,17 @@
+/* Error: "ere 키워드는 유요하지 않습니다."
+ *    ,
+ * 23 |     @include size(100px, $rounded: ere);
+ *    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *    '
+ *   src\syntax\08-flow-control.scss 23:5  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: 'Error: "ere \d0a4 \c6cc \b4dc \b294  \c720 \c694 \d558 \c9c0  \c54a \c2b5 \b2c8 \b2e4 ."\a    \2577 \a 23 \2502      @include size(100px, $rounded: ere);\d\a    \2502      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   src\\syntax\\08-flow-control.scss 23:5  root stylesheet';
+}

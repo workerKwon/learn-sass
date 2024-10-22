@@ -1,0 +1,8 @@
+@use "./techit";
+
+.wrapper {
+    border: 1px solid red;
+    @include techit.mixin-size(200px, 100px);
+    margin: techit.$lion-spacing-1;
+    padding: techit.$mixin-spacing-2;
+}

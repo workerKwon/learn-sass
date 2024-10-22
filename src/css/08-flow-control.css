@@ -1,17 +1,92 @@
-/* Error: "ere 키워드는 유요하지 않습니다."
- *    ,
- * 23 |     @include size(100px, $rounded: ere);
- *    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- *    '
- *   src\syntax\08-flow-control.scss 23:5  root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: 'Error: "ere \d0a4 \c6cc \b4dc \b294  \c720 \c694 \d558 \c9c0  \c54a \c2b5 \b2c8 \b2e4 ."\a    \2577 \a 23 \2502      @include size(100px, $rounded: ere);\d\a    \2502      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a    \2575 \a   src\\syntax\\08-flow-control.scss 23:5  root stylesheet';
+.icon-search {
+  background: url(/images/icons/search.svg) no-repeat 0 0;
 }
+
+.icon-more {
+  background: url(/images/icons/more.svg) no-repeat 0 0;
+}
+
+.icon-arrow {
+  background: url(/images/icons/arrow.svg) no-repeat 0 0;
+}
+
+.container:nth-child(1) {
+  background-color: palegoldenrod;
+}
+
+.container:nth-child(2) {
+  background-color: palegoldenrod;
+}
+
+.container:nth-child(3) {
+  background-color: palegoldenrod;
+}
+
+.container:nth-child(4) {
+  background-color: palegoldenrod;
+}
+
+.container:nth-child(5) {
+  background-color: palegoldenrod;
+}
+
+.font-size-12 {
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: 1px;
+}
+
+.font-size-14 {
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 1px;
+}
+
+.font-size-16 {
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 1px;
+}
+
+.font-size-18 {
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 1px;
+}
+
+.font-size-20 {
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: 1px;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+}
+
+h1 {
+  line-height: 1.2;
+  font-size: 64px;
+  font-weight: bold;
+}
+
+h2 {
+  line-height: 1.2;
+  font-size: 48px;
+  font-weight: bold;
+}
+
+h3 {
+  line-height: 1.2;
+  font-size: 32px;
+  font-weight: bold;
+}
+
+h4 {
+  line-height: 1.4;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=08-flow-control.css.map */

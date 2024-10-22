@@ -1,3 +1,6 @@
+@use "sass:list";
+@use "sass:color";
+
 @mixin size($width, $height: null, $rounded: null) {
     width: $width;
     @if $height != null {
@@ -15,10 +18,63 @@
     } @else if $rounded == xl {
         border-radius: 8px;
     } @else {
-        @error "#{$rounded} 키워드는 유요하지 않습니다.";
+        @warn "#{$rounded} 키워드는 유요하지 않습니다.";
     }
 }
 
+@mixin font($font-size: 16, $until-font-size: 24) {
+    @while $font-size <= $until-font-size {
+        .font-size-#{$font-size} {
+            font-size: #{$font-size}px;
+            line-height: #{$font-size + 2}px;
+            letter-spacing: 1px;
+        }
+
+        $font-size: $font-size + 2;
+    }
+}
+
+@mixin colorScale($selector) {
+    @for $i from 1 through 5 {
+        #{$selector}:nth-child(#{$i}) {
+            background-color: palegoldenrod;
+        }
+    }
+}
+
+$icons: search more arrow;
+
+@mixin bgIcons($icons) {
+    @each $icon in $icons {
+        .icon-#{$icon} {
+            background: url(/images/icons/#{$icon}.svg) no-repeat 0 0;
+        }
+    }
+}
+@include bgIcons($icons);
+
+@include colorScale(".container");
+
+@include font(12, 20);
+
 .box {
     @include size(100px, $rounded: ere);
+}
+
+$headings: (
+    h1: 64px 1.2,
+    h2: 48px 1.2,
+    h3: 32px 1.2,
+    h4: 26px 1.4,
+);
+
+@each $name, $values in $headings {
+    $font-size: list.nth($values, 1);
+    $line-height: list.nth($values, 2);
+
+    #{$name} {
+        line-height: $line-height;
+        font-size: $font-size;
+        font-weight: bold;
+    }
 }

@@ -6,7 +6,8 @@
     "scripts": {
         "dev": "run-p serve update",
         "serve": "live-server --port=8090 --host=localhost --browser=chrome",
-        "sass": "sass src/syntax:src/css src/scss:src/styles",
+        "sass": "sass src/scss:src/styles",
+        "sass-syntax-watch": "sass src/syntax:src/css --watch",
         "compile-sass": "sass src/syntax/input.scss src/syntax/output.css",
         "watch": "npm run sass -- --watch",
         "update": "npm run watch -- --update",

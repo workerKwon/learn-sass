@@ -1,3 +1,6 @@
+@use "sass:map";
+@use "sass:string";
+
 @mixin inline-size($width) {
     width: $width;
     inline-size: $width;
@@ -6,7 +9,38 @@
     height: $height;
     block-size: $height;
 }
+
+@mixin size-square($value) {
+    @include inline-size($value);
+    @include block-size($value);
+}
+
 @mixin size($width, $height) {
     @include inline-size($width);
     @include block-size($height);
+}
+
+// 미디어쿼리 중단점
+$breakpoints: (
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    2xl: 1536,
+);
+
+// 미디어쿼리 믹스인
+@mixin mq($breakpoint) {
+    @each $key, $value in $breakpoints {
+        @if not map.has-key($breakpoints, $breakpoint) {
+            @error '#{$breakpoint}는 유효한 중단점이 아닙니다.(유효한 값:sm, md, lg, xl, 2xl)';
+        }
+    }
+
+    $viewport: map.get($breakpoints, $breakpoint);
+    $query: string.unquote("min-width: #{$viewport}px");
+
+    @media ($query) {
+        @content;
+    }
 }

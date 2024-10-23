@@ -1,0 +1,10 @@
+@use "./../base";
+@use "./../abstracts" as *;
+
+.svg-icon {
+    @include size-square(12px);
+
+    @include mq(lg) {
+        @include size-square(16px);
+    }
+}

@@ -39,7 +39,7 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.15;
-  margin: 0;
+  margin: 50px;
 }
 
 /* A elements that don't have a class get default styles */
@@ -99,8 +99,98 @@ em {
     scroll-behavior: auto !important;
   }
 }
+:root {
+  color-scheme: light dark;
+}
+
 body {
   font-family: "SUIT Variable", sans-serif;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.svg-icon {
+  width: 12px;
+  inline-size: 12px;
+  height: 12px;
+  block-size: 12px;
+}
+@media (min-width: 1024px) {
+  .svg-icon {
+    width: 16px;
+    inline-size: 16px;
+    height: 16px;
+    block-size: 16px;
+  }
+}
+
+.combobox {
+  color: #acacac;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  position: relative;
+  border-radius: 10px;
+  font-size: 12px;
+}
+@media (min-width: 1024px) {
+  .combobox {
+    font-size: 18px;
+  }
+}
+.combobox svg {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+.combobox svg:nth-of-type(1) {
+  left: 10px;
+}
+.combobox svg:nth-of-type(2) {
+  right: 10px;
+}
+.combobox label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+.combobox select {
+  color: inherit;
+  appearance: none;
+  border: 0;
+  padding: 0 24px;
+  background-color: transparent;
+}
+
+.ui-container {
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+.ui-container h1 {
+  margin: 5rem 0 2rem;
+}
+.ui-container ul {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
 }
 
 /*# sourceMappingURL=main.css.map */

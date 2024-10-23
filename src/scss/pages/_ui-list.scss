@@ -1,0 +1,16 @@
+.ui-container {
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+
+    h1 {
+        margin: 5rem 0 2rem;
+    }
+
+    ul {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+    }
+}

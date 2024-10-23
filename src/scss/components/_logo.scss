@@ -1,0 +1,7 @@
+@use "./../base";
+@use "./../abstracts" as *;
+
+.logo {
+    display: block;
+    color: light-dark($text-color, $white);
+}

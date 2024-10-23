@@ -135,16 +135,20 @@ body {
 }
 
 .combobox {
-  color: #acacac;
+  color: light-dark(#86868b, #d11719);
   border: 1px solid currentColor;
   display: inline-flex;
+  border-radius: 2px;
+  font-size: 0.875rem;
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
   position: relative;
-  border-radius: 10px;
-  font-size: 12px;
 }
 @media (min-width: 1024px) {
   .combobox {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 }
 .combobox svg {
@@ -154,19 +158,20 @@ body {
   pointer-events: none;
 }
 .combobox svg:nth-of-type(1) {
-  left: 10px;
+  left: 0.5rem;
 }
 .combobox svg:nth-of-type(2) {
-  right: 10px;
+  right: 0.5rem;
 }
 .combobox label {
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
   margin: -1px;
-  overflow: hidden;
   clip: rect(0, 0, 0, 0);
+  clip-path: polygon(0 0, 0 0, 0 0);
+  overflow: hidden;
+  padding: 0;
   white-space: nowrap;
   border-width: 0;
 }
@@ -174,10 +179,145 @@ body {
   color: inherit;
   appearance: none;
   border: 0;
-  padding: 0 24px;
+  padding: 0.5rem 1.5rem;
   background-color: transparent;
 }
 
+.button {
+  border: 0;
+  background-color: transparent;
+  font-size: 0.875rem;
+  padding: 0.75rem;
+  display: inline-block;
+  white-space: nowrap;
+}
+.button--rounded {
+  border-radius: 9999px;
+}
+.button--fill {
+  background-color: #0071e3;
+  color: #f5f5f7;
+}
+.button--fill.black {
+  background-color: #1d1d1f;
+}
+.button--outline {
+  border: 1px solid currentColor;
+  color: #0071e3;
+}
+.button--outline.black {
+  color: #1d1d1f;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  height: 31.25rem;
+  block-size: 31.25rem;
+  padding-top: 2.5rem;
+  padding-block-start: 2.5rem;
+}
+@media (min-width: 1024px) {
+  .product-card {
+    height: 40.625rem;
+    block-size: 40.625rem;
+    padding-top: 3.75rem;
+    padding-block-start: 3.75rem;
+  }
+}
+.product-card.dark-bg {
+  color: #f5f5f7;
+  background-color: #1d1d1f;
+}
+.product-card__headline {
+  font-size: 2rem;
+  font-weight: 700;
+}
+@media (min-width: 1024px) {
+  .product-card__headline {
+    font-size: 2.5rem;
+  }
+}
+.product-card__description {
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+@media (min-width: 1024px) {
+  .product-card__description {
+    font-size: 1.25rem;
+  }
+}
+.product-card .line-break span {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+@media (min-width: 1024px) {
+  .product-card .line-break span {
+    display: inline;
+  }
+}
+.product-card__release {
+  font-size: 1rem;
+  color: #86868b;
+}
+.product-card__links {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.product-card {
+  background-position: 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.ipad-pro {
+  background-image: image-set(url("/src/assets/apple/ipad_pro.jpeg") 1x, url("/src/assets/apple/ipad_pro_2x.jpeg") 2x);
+}
+
+.ipad-air {
+  background-image: image-set(url("/src/assets/apple/ipad_air.jpeg") 1x, url("/src/assets/apple/ipad_air_2x.jpeg") 2x);
+}
+
+.iphone15-pro {
+  background-image: image-set(url("/src/assets/apple/iphone15_pro.jpeg") 1x, url("/src/assets/apple/iphone15_pro_2x.jpeg") 2x);
+}
+
+.iphone15 {
+  background-image: image-set(url("/src/assets/apple/iphone15.jpeg") 1x, url("/src/assets/apple/iphone15_2x.jpeg") 2x);
+}
+
+.apple-watch {
+  background-image: image-set(url("/src/assets/apple/apple_watch.jpeg") 1x, url("/src/assets/apple/apple_watch_2x.jpeg") 2x);
+}
+
+.macbook-air {
+  background-image: image-set(url("/src/assets/apple/macbook_air.jpeg") 1x, url("/src/assets/apple/macbook_air_2x.jpeg") 2x);
+}
+
+.airpods-pro {
+  background-image: image-set(url("/src/assets/apple/airpods_pro.jpeg") 1x, url("/src/assets/apple/airpods_pro_2x.jpeg") 2x);
+}
+
+@media (min-width: 1024px) {
+  .ipad-pro {
+    background-image: image-set(url("/src/assets/apple/ipad_pro_wide.jpeg") 1x, url("/src/assets/apple/ipad_pro_wide_2x.jpeg") 2x);
+  }
+}
+@media (min-width: 1024px) {
+  .ipad-air {
+    background-image: image-set(url("/src/assets/apple/ipad_air_wide.jpeg") 1x, url("/src/assets/apple/ipad_air_wide_2x.jpeg") 2x);
+  }
+}
+@media (min-width: 1024px) {
+  .iphone15-pro {
+    background-image: image-set(url("/src/assets/apple/iphone15_pro_wide.jpeg") 1x, url("/src/assets/apple/iphone15_pro_wide_2x.jpeg") 2x);
+  }
+}
 .ui-container {
   min-height: 100vh;
   display: flex;
@@ -191,6 +331,19 @@ body {
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .product-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+    gap: 20px 20px;
+  }
+  .product-list .ipad-pro,
+  .product-list .ipad-air,
+  .product-list .iphone15-pro {
+    grid-column-end: span 2;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */

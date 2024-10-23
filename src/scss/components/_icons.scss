@@ -2,9 +2,9 @@
 @use "./../abstracts" as *;
 
 .svg-icon {
-    @include size-square(12px);
+    @include size-square-icon(12);
 
     @include mq(lg) {
-        @include size-square(16px);
+        @include size-square-icon(16);
     }
 }

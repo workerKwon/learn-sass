@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["../../scss/abstracts/test.scss","../../scss/abstracts/_mixins.scss"],"names":[],"mappings":"AAEA;ECEI,ODDc;ECEd,aDFc;ECKd,QDLqB;ECMrB,YDNqB","file":"test.css"}
+{"version":3,"sourceRoot":"","sources":["../../scss/abstracts/_variables.scss","../../scss/abstracts/test.scss","../../scss/abstracts/_mixins.scss"],"names":[],"mappings":"AACA;EACI;;;ACAJ;ECmBI,ODlBc;ECmBd,aDnBc;ECsBd,QDtBqB;ECuBrB,YDvBqB","file":"test.css"}

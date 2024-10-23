@@ -1,0 +1,118 @@
+@use "./../base";
+@use "./../abstracts" as *;
+@use "./buttons";
+
+.product-card {
+    $block-size-sm: rem(500px);
+    $block-size-lg: rem(650px);
+    $gap: $spacing-2xl; // 16px
+    $spacing-start-sm: $spacing-8xl; // 40
+    $spacing-start-lg: $spacing-9xl; // 60
+
+    @include flex-container(column items-center);
+    gap: $gap;
+
+    @include block-size($block-size-sm);
+    @include padding-block-start($spacing-start-sm);
+    @include mq(lg) {
+        @include block-size($block-size-lg);
+        @include padding-block-start($spacing-start-lg);
+    }
+
+    // 어두운 배경
+    &.dark-bg {
+        $text-color: $white;
+        $bg-color: $black;
+
+        color: $text-color;
+        background-color: $bg-color;
+    }
+
+    // 제품 카드 제목
+    &__headline {
+        $headline-sm: $text-4xl; // 32px
+        $headline-lg: $text-5xl; // 40px
+
+        font-size: $headline-sm; // 32px
+        font-weight: 700;
+
+        @include mq(lg) {
+            font-size: $headline-lg; // 40px
+        }
+    }
+
+    // 제품 카드 설명
+    &__description {
+        $description-sm: $text-lg; // 18px
+        $description-lg: $text-xl; // 20px
+
+        font-size: $description-sm; // 18px
+        line-height: $line-normal;
+
+        @include mq(lg) {
+            font-size: $description-lg; // 20px
+        }
+    }
+
+    .line-break span {
+        @include flex-container(row justify-center);
+
+        @include mq(lg) {
+            display: inline;
+        }
+    }
+
+    // 출시일 추후 공개
+    &__release {
+        $release-text: $text-base; // 16px
+        // $color: $gray;
+        $color: $secondary-color;
+
+        font-size: $release-text; // 16
+        color: $color; // gray
+    }
+
+    &__links {
+        $gap: $spacing-2xl;
+
+        @include flex-container(row);
+        gap: $gap;
+    }
+}
+
+// 제품 카드 배경이미지
+.product-card {
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+$bg-images: (
+    ipad-pro: "ipad_pro",
+    ipad-air: "ipad_air",
+    iphone15-pro: "iphone15_pro",
+    iphone15: "iphone15",
+    apple-watch: "apple_watch",
+    macbook-air: "macbook_air",
+    airpods-pro: "airpods_pro",
+);
+
+@each $selector, $bg-image in $bg-images {
+    .#{$selector} {
+        background-image: image-set(url("/src/assets/apple/#{$bg-image}.jpeg") 1x, url("/src/assets/apple/#{$bg-image}_2x.jpeg") 2x);
+    }
+}
+
+$bg-wide-images: (
+    ipad-pro: "ipad_pro_wide",
+    ipad-air: "ipad_air_wide",
+    iphone15-pro: "iphone15_pro_wide",
+);
+
+@each $selector, $bg-wide-image in $bg-wide-images {
+    @include mq(lg) {
+        .#{$selector} {
+            background-image: image-set(url("/src/assets/apple/#{$bg-wide-image}.jpeg") 1x, url("/src/assets/apple/#{$bg-wide-image}_2x.jpeg") 2x);
+        }
+    }
+}

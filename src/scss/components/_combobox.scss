@@ -5,48 +5,54 @@
 $default-color: #757575;
 
 .combobox {
-    color: $tertiary-color;
+    $light-text-color: $secondary-color;
+    $dark-text-color: $accent-color;
+    $font-mobile: $text-sm;
+    $font-desktop: $text-lg;
+
+    color: light-dark($light-text-color, $dark-text-color);
     border: 1px solid currentColor;
     display: inline-flex;
-    position: relative;
-    border-radius: 10px;
-    font-size: 12px;
+    @include rounded();
+    font-size: $font-mobile;
+
+    @include flex-container(row nowrap justify-center, inline-flex);
 
     @media (min-width: 1024px) {
-        font-size: 18px;
+        font-size: $font-desktop;
     }
 
-    svg {
-        position: absolute;
-        top: 50%;
-        translate: 0 -50%;
-        pointer-events: none;
-
+    @include relative-container(svg) {
         &:nth-of-type(1) {
-            left: 10px;
+            left: $spacing-base;
         }
         &:nth-of-type(2) {
-            right: 10px;
+            right: $spacing-base;
         }
     }
+    // svg {
+    //     position: absolute;
+    //     top: 50%;
+    //     translate: 0 -50%;
+    //     pointer-events: none;
+
+    //     &:nth-of-type(1) {
+    //         left: $spacing-base;
+    //     }
+    //     &:nth-of-type(2) {
+    //         right: $spacing-base;
+    //     }
+    // }
 
     label {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border-width: 0;
+        @include a11y-hidden;
     }
 
     select {
         color: inherit;
         appearance: none;
         border: 0;
-        padding: 0 24px;
+        padding: $spacing-base $spacing-5xl;
         background-color: transparent;
     }
 }

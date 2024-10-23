@@ -1,0 +1,38 @@
+@use "./../base";
+@use "./../abstracts" as *;
+
+.button {
+    $default-color: $primary-color;
+    $dark-color: $black;
+    $light-color: $white;
+
+    border: 0;
+    background-color: transparent;
+    @include text-size(sm);
+    padding: $spacing-xl;
+    display: inline-block;
+    white-space: nowrap;
+    // background-color: yellow;
+
+    &--rounded {
+        @include rounded(full);
+    }
+
+    &--fill {
+        background-color: $default-color;
+        color: $light-color;
+
+        &.black {
+            background-color: $dark-color;
+        }
+    }
+
+    &--outline {
+        border: 1px solid currentColor;
+        color: $default-color;
+
+        &.black {
+            color: $dark-color;
+        }
+    }
+}

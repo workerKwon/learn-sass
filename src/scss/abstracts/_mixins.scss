@@ -1,5 +1,22 @@
 @use "sass:map";
 @use "sass:string";
+@use "sass:math";
+@use "sass:list";
+@use "./variables" as *;
+
+// 숨김 콘텐츠 믹스인
+@mixin a11y-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+    clip-path: polygon(0 0, 0 0, 0 0);
+    overflow: hidden;
+    padding: 0;
+    white-space: nowrap;
+    border-width: 0;
+}
 
 @mixin inline-size($width) {
     width: $width;
@@ -13,6 +30,12 @@
 @mixin size-square($value) {
     @include inline-size($value);
     @include block-size($value);
+}
+
+@mixin size-square-icon($value) {
+    $size: if(math.unit($value) == "px", $value, $value * 1px);
+
+    @include size-square($size);
 }
 
 @mixin size($width, $height) {
@@ -43,4 +66,421 @@ $breakpoints: (
     @media ($query) {
         @content;
     }
+}
+
+// Rounded 스타일 믹스인
+@mixin rounded($rounded: sm) {
+    @if $rounded == sm {
+        border-radius: 2px;
+    } @else if $rounded == md {
+        border-radius: 4px;
+    } @else if $rounded == lg {
+        border-radius: 6px;
+    } @else if $rounded == xl {
+        border-radius: 8px;
+    } @else if $rounded == full {
+        border-radius: 9999px;
+    } @else {
+        border-radius: $rounded;
+    }
+}
+
+// Font Size 믹스인
+@mixin text-size($size: base) {
+    @if $size == xs {
+        font-size: $text-xs;
+    } @else if $size == sm {
+        font-size: $text-sm;
+    } @else if $size == base {
+        font-size: $text-base;
+    } @else if $size == lg {
+        font-size: $text-lg;
+    } @else if $size == xl {
+        font-size: $text-xl;
+    } @else if $size == 2xl {
+        font-size: $text-2xl;
+    } @else if $size == 3xl {
+        font-size: $text-3xl;
+    } @else if $size == 4xl {
+        font-size: $text-4xl;
+    } @else if $size == 5xl {
+        font-size: $text-5xl;
+    } @else if $size == 6xl {
+        font-size: $text-6xl;
+    } @else if $size == 7xl {
+        font-size: $text-7xl;
+    } @else if $size == 8xl {
+        font-size: $text-8xl;
+    } @else if $size == 9xl {
+        font-size: $text-9xl;
+    } @else {
+        font-size: $size;
+    }
+}
+
+// gap 믹스인
+@mixin gap($spacing: base) {
+    @if $spacing == xs {
+        gap: $spacing-xs;
+    } @else if $spacing == sm {
+        gap: $spacing-sm;
+    } @else if $spacing == base {
+        gap: $spacing-base;
+    } @else if $spacing == lg {
+        gap: $spacing-lg;
+    } @else if $spacing == xl {
+        gap: $spacing-xl;
+    } @else if $spacing == 2xl {
+        gap: $spacing-2xl;
+    } @else if $spacing == 3xl {
+        gap: $spacing-3xl;
+    } @else if $spacing == 4xl {
+        gap: $spacing-4xl;
+    } @else if $spacing == 5xl {
+        gap: $spacing-5xl;
+    } @else if $spacing == 6xl {
+        gap: $spacing-6xl;
+    } @else if $spacing == 7xl {
+        gap: $spacing-7xl;
+    } @else if $spacing == 8xl {
+        gap: $spacing-8xl;
+    } @else if $spacing == 9xl {
+        gap: $spacing-9xl;
+    } @else {
+        gap: $spacing;
+    }
+}
+
+// position 관련 믹스인
+@mixin relative-container($element, $top: 50%, $translate: 0 -50%) {
+    position: relative;
+
+    #{$element} {
+        position: absolute;
+        top: $top;
+        translate: $translate;
+        pointer-events: none;
+
+        @content;
+    }
+}
+
+@mixin flex-container($args, $mode: flex) {
+    display: if($mode == flex, flex, inline-flex);
+    @include flex-container-append($args);
+}
+
+@mixin flex-container-append($args) {
+    @if $args != null {
+        // flex-direction ------------------------------------------
+        @each $direction in row row-reverse column column-reverse {
+            $direction-index: list.index($args, $direction);
+
+            @if $direction-index {
+                flex-direction: list.nth($args, $direction-index);
+            }
+        }
+
+        // flex-wrap -----------------------------------------------
+        @each $wrap in nowrap wrap wrap-reverse {
+            $wrap-index: list.index($args, $wrap);
+
+            @if $wrap-index {
+                flex-wrap: list.nth($args, $wrap-index);
+            }
+        }
+
+        // justify-content ------------------------------------------
+        @each $justifyContent in justify-start justify-center justify-end justify-left justify-right justify-normal justify-between justify-around justify-evenly justify-safe justify-unsafe justify-inherit justify-initial justify-unset {
+            $justifyContent-index: list.index($args, $justifyContent);
+
+            @if $justifyContent-index {
+                $justifyContent-value: str-replace(nth($args, $justifyContent-index), "justify-");
+                @include justify-content($justifyContent-value, flex);
+            }
+        }
+
+        // align-items ------------------------------------------------
+        @each $alignItems in items-normal items-stretch items-start items-end items-center items-baseline items-first-baseline items-last-baseline items-safe items-unsafe items-inherit items-initial items-unset {
+            $alignItems-index: list.index($args, $alignItems);
+
+            @if $alignItems-index {
+                $alignItems-value: str-replace(nth($args, $alignItems-index), "items-");
+                @include align-items($alignItems-value, flex);
+            }
+        }
+
+        // align-content ------------------------------------------------
+        @each $alignContent in content-start content-center content-end content-left content-right content-normal content-baseline content-first-baseline content-last-baseline content-between content-around content-evenly content-stretch content-safe content-unsafe content-inherit content-initial content-unset {
+            $alignContent-index: index($args, $alignContent);
+
+            @if $alignContent-index {
+                $alignContent-value: str-replace(nth($args, $alignContent-index), "content-");
+                @include align-content($alignContent-value, flex);
+            }
+        }
+    }
+}
+
+@function str-replace($string, $search, $replace: "") {
+    $index: str-index($string, $search);
+
+    @if $index {
+        @return string.slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    }
+
+    @return $string;
+}
+
+@mixin justify-content($value, $mode: grid) {
+    @if $value == "start" {
+        justify-content: if($mode == grid, start, flex-start);
+    }
+    @if $value == "end" {
+        justify-content: if($mode == grid, end, flex-end);
+    }
+    @if $value == "center" {
+        justify-content: center;
+    }
+    @if $value == "left" {
+        justify-content: left;
+    }
+    @if $value == "right" {
+        justify-content: right;
+    }
+
+    @if $value == "normal" {
+        justify-content: normal;
+    }
+
+    @if $value == "between" {
+        justify-content: space-between;
+    }
+    @if $value == "around" {
+        justify-content: space-around;
+    }
+    @if $value == "evenly" {
+        justify-content: space-evenly;
+    }
+    @if $value == "stretch" {
+        justify-content: stretch;
+    }
+
+    @if $value == "safe" {
+        justify-content: safe center;
+    }
+    @if $value == "unsafe" {
+        justify-content: unsafe center;
+    }
+
+    @if $value == "inherit" {
+        justify-content: inherit;
+    }
+    @if $value == "initial" {
+        justify-content: initial;
+    }
+    @if $value == "unset" {
+        justify-content: unset;
+    }
+}
+@mixin align-items($value, $mode: grid) {
+    @if $value == "normal" {
+        align-items: normal;
+    }
+    @if $value == "stretch" {
+        align-items: stretch;
+    }
+
+    @if $value == "start" {
+        align-items: if($mode == grid, start, flex-start);
+    }
+    @if $value == "end" {
+        align-items: if($mode == grid, end, flex-end);
+    }
+    @if $value == "center" {
+        align-items: center;
+    }
+
+    @if $value == "baseline" {
+        align-items: baseline;
+    }
+    @if $value == "first-baseline" {
+        align-items: first baseline;
+    }
+    @if $value == "last-baseline" {
+        align-items: last baseline;
+    }
+    @if $value == "safe" {
+        align-items: safe center;
+    }
+    @if $value == "unsafe" {
+        align-items: unsafe center;
+    }
+
+    @if $value == "inherit" {
+        align-items: inherit;
+    }
+    @if $value == "initial" {
+        align-items: initial;
+    }
+    @if $value == "unset" {
+        align-items: unset;
+    }
+}
+@mixin align-content($value, $mode: grid) {
+    @if $value == "start" {
+        align-content: if($mode == grid, start, flex-start);
+    }
+    @if $value == "end" {
+        align-content: if($mode == grid, end, flex-end);
+    }
+    @if $value == "center" {
+        align-content: center;
+    }
+    @if $value == "left" {
+        align-content: left;
+    }
+    @if $value == "right" {
+        align-content: right;
+    }
+
+    @if $value == "normal" {
+        align-content: normal;
+    }
+
+    @if $value == "baseline" {
+        align-content: baseline;
+    }
+    @if $value == "first-baseline" {
+        align-content: first baseline;
+    }
+    @if $value == "last-baseline" {
+        align-content: last baseline;
+    }
+
+    @if $value == "between" {
+        align-content: space-between;
+    }
+    @if $value == "around" {
+        align-content: space-around;
+    }
+    @if $value == "evenly" {
+        align-content: space-evenly;
+    }
+    @if $value == "stretch" {
+        align-content: stretch;
+    }
+
+    @if $value == "safe" {
+        align-content: safe center;
+    }
+    @if $value == "unsafe" {
+        align-content: unsafe center;
+    }
+
+    @if $value == "inherit" {
+        align-content: inherit;
+    }
+    @if $value == "initial" {
+        align-content: initial;
+    }
+    @if $value == "unset" {
+        align-content: unset;
+    }
+}
+
+// 여백 (padding, margin)
+@mixin padding-inline-start($value) {
+    padding-left: $value;
+    padding-inline-start: $value;
+}
+@mixin padding-inline-end($value) {
+    padding-right: $value;
+    padding-inline-end: $value;
+}
+@mixin padding-block-start($value) {
+    padding-top: $value;
+    padding-block-start: $value;
+}
+@mixin padding-block-end($value) {
+    padding-bottom: $value;
+    padding-block-end: $value;
+}
+
+@mixin paddingX($paddingX) {
+    @include padding-inline-start($paddingX);
+    @include padding-inline-end($paddingX);
+}
+@mixin paddingY($paddingY) {
+    @include padding-block-start($paddingY);
+    @include padding-block-end($paddingY);
+}
+
+@mixin padding($paddingX, $paddingY: null) {
+    @include paddingX($paddingX);
+    @if $paddingY == null {
+        @include paddingY($paddingX);
+    } @else {
+        @include paddingY($paddingY);
+    }
+}
+
+@mixin margin-inline-start($value) {
+    margin-left: $value;
+    margin-inline-start: $value;
+}
+@mixin margin-inline-end($value) {
+    margin-right: $value;
+    margin-inline-end: $value;
+}
+@mixin margin-block-start($value) {
+    margin-top: $value;
+    margin-block-start: $value;
+}
+@mixin margin-block-end($value) {
+    margin-bottom: $value;
+    margin-block-end: $value;
+}
+
+@mixin marginX($marginX) {
+    @include margin-inline-start($marginX);
+    @include margin-inline-end($marginX);
+}
+@mixin marginY($marginY) {
+    @include margin-block-start($marginY);
+    @include margin-block-end($marginY);
+}
+
+@mixin margin($marginX, $marginY: null) {
+    @include marginX($marginX);
+    @if $marginY == null {
+        @include marginY($marginX);
+    } @else {
+        @include marginY($marginY);
+    }
+}
+
+// Grid Box
+@mixin gridbox($column-count, $column-gap: 20px, $row-gap: null) {
+    $row-gap: if($row-gap == null, $column-gap, $row-gap);
+
+    display: grid;
+    grid-template-columns: repeat($column-count, minmax(320px, 1fr));
+    gap: $row-gap $column-gap;
+}
+
+@mixin grid-column-start($number) {
+    grid-column-start: $number;
+}
+
+@mixin grid-row-start($number) {
+    grid-row-start: $number;
+}
+
+@mixin grid-column-span($count) {
+    grid-column-end: span $count;
+}
+
+@mixin grid-row-span($count) {
+    grid-row-end: span $count;
 }

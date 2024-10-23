@@ -1,0 +1,11 @@
+@use "./../base";
+@use "./../abstracts" as *;
+
+.menu {
+    @include flex-container(column no-wrap);
+    @include gap(base);
+
+    @include mq(lg) {
+        @include flex-container(row no-wrap justify-between);
+    }
+}
